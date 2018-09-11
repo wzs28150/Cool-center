@@ -1,0 +1,29 @@
+ul li {
+	list-style: none
+}
+
+a {
+	text-decoration: none;
+	color: #c0ccda;
+}
+
+.pointer {
+	cursor: pointer
+}
+
+.el-select-dropdown__list {
+	padding: 5px 0;
+}
+
+.el-step__icon {
+	font-size: 12px;
+}
+
+.el-step__title {
+	font-size: 14px;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}

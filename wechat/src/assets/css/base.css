@@ -1,0 +1,33 @@
+.form-title {
+	padding-bottom: 10px;
+	font-weight: bold;
+	font-size: 20px;
+	border-bottom: 1px solid #ccc;
+}
+
+.el-loading-mask {
+	position: fixed;
+	z-index: 9;
+	height: calc(100%);
+	top: 0;
+	background: #fff;
+}
+
+.el-loading-spinner {
+	/* position: fixed;
+  z-index: 9;
+  height: calc(100% - 56px);
+  top: 0; */
+}
+
+.el-scrollbar__wrap {
+	width: 100%;
+}
+
+#app {
+	height: 100%;
+}
+
+.el-message-box {
+	width: 80%;
+}
