@@ -1,5 +1,5 @@
 <?php
-namespace cool;
+namespace com;
 
 use think\Db;
 use think\Request;
@@ -72,10 +72,10 @@ class Sign
            return $str;
     }
 
-    public function getsign()
+    public function getsign($url)
     {
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-        $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        // $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $nonceStr = $this->getRandChar(16);
         $timestamp = time();
         $string1 = 'jsapi_ticket='.$this->getjsapi_ticket().'&noncestr='.$nonceStr.'&timestamp='.$timestamp.'&url='.$url;

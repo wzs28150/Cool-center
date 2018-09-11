@@ -33,12 +33,6 @@ class Article extends Common
     try {
       // 添加文章
 			$this->data($param)->allowField(true)->save();
-      // 减文章数 广告数
-      Db::name('member')->where('id', $param['userid'])
-      ->update([
-          'anums'  => Db::raw('anums-1'),
-          'adnums' => Db::raw('adnums-1'),
-      ]);
 			return $this->id;
 		} catch(\Exception $e) {
 			$this->error = '添加失败';
@@ -141,6 +135,12 @@ class Article extends Common
     $this->startTrans();
     try {
         $this->allowField(true)->save($param, ['id' => $id]);
+        // 减文章数 广告数
+        Db::name('member')->where('id', $param['userid'])
+        ->update([
+            'anums'  => Db::raw('anums-1'),
+            'adnums' => Db::raw('adnums-1'),
+        ]);
         $this->commit();
         return true;
     } catch (\Exception $e) {

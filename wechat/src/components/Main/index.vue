@@ -137,7 +137,7 @@ export default {
       let $url = '/articlen/info'
       router.push({ path: $url, query: { url: $href }})
     },
-    getCurrentPage() {
+    getanums() {
       let data = this.$route.query
       if (data) {
         if (data.page) {
@@ -202,37 +202,8 @@ export default {
           setTimeout(() => {
             _g.closeGlobalLoading()
           }, 1500)
-          // if (pageNum === 0) {
-          //   // this.list = res.data
-          //   successCallback && successCallback(res.data)
-          //
-          // } else {
-          //   // this.list.push(res.data)
-          //   successCallback && successCallback(res.data)
-          // }
         })
       })
-      // setTimeout(function () {
-      //   try {
-      //     if (pageNum === 0) {
-      //       // 此处模拟下拉刷新返回的数据
-      //       var id = new Date().getTime()
-      //       var newObj = { title: '【新增新闻】 标题' + id, content: '新增新闻的内容', id: id }
-      //       successCallback && successCallback(newObj)
-      //     } else {
-      //       // 此处模拟上拉加载返回的数据
-      //       var list = []
-      //       for (var i = 0; i < pageSize; i++) {
-      //         var upIndex = (pageNum - 1) * pageSize + i + 1
-      //         list.push({ title: '【新闻' + upIndex + '】 标题标题标题标题标题标题', content: '内容内容内容内容内容内容内容内容内容内容', id: upIndex })
-      //       }
-      //       successCallback && successCallback(list)
-      //     }
-      //   } catch (e) {
-      //     // 联网失败的回调
-      //     errorCallback && errorCallback()
-      //   }
-      // }, 1000)
     },
     init() {
       this.getId()
@@ -255,22 +226,21 @@ export default {
     }
   },
   mounted () {
-    // 创建MeScroll对象:为避免配置的id和父组件id重复,这里使用ref的方式初始化mescroll
-    this.mescroll = new MeScroll(this.$refs.mescroll, {// 在mounted生命周期初始化mescroll,以确保您配置的dom元素能够被找到.
+    this.mescroll = new MeScroll(this.$refs.mescroll, {
       down: {
-        auto: false, // 是否在初始化完毕之后自动执行下拉回调callback; 默认true
-        callback: this.downCallback, // 下拉刷新的回调
+        auto: false,
+        callback: this.downCallback,
         page: {
-          num: 0, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
-          size: 20 // 每页数据的数量
+          num: 0,
+          size: 20
         }
       },
       up: {
-        auto: true, // 是否在初始化时以上拉加载的方式自动加载第一页数据; 默认false
-        callback: this.upCallback, // 上拉回调,此处可简写; 相当于 callback: function (page) { upCallback(page); }
+        auto: true,
+        callback: this.upCallback,
         page: {
-          num: 0, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
-          size: 20 // 每页数据的数量
+          num: 0,
+          size: 20
         },
         isBounce: true,
         noMoreSize: 5,

@@ -156,10 +156,10 @@ Vue.use(VueHtml5Editor, {
   }
 })
 // axios.defaults.baseURL = HOST
-// axios.defaults.baseURL = 'http://192.168.3.19:8900/'
+axios.defaults.baseURL = 'http://192.168.3.19:8900/'
 // axios.defaults.baseURL = 'http://192.168.1.106:9002'
 // http://wdj.coolwx.com.cn/
-axios.defaults.baseURL = 'http://wdj.coolwx.com.cn'
+// axios.defaults.baseURL = 'http://wdj.coolwx.com.cn'
 axios.defaults.timeout = 1000 * 15
 axios.defaults.headers.authKey = Lockr.get('authKey')
 axios.defaults.headers.sessionId = Lockr.get('sessionId')

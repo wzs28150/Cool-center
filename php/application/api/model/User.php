@@ -64,6 +64,10 @@ class User extends Common
             $this->error = '密码错误' . user_md5($userpwd);
             return false;
         }
+        if(strtotime($userInfo['beizhu1']) < time()){
+            $this->error = '帐号已到期,请联系客服续费~';
+            return false;
+        }
         // if ($userInfo['status'] === 0) {
         //     $this->error = '帐号已被禁用';
         //     return false;

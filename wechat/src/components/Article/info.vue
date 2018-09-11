@@ -57,7 +57,8 @@ export default {
       gzurl: '',
       home_url: '',
       img: [],
-      share_desc: ''
+      share_desc: '',
+      share_pic: ''
     },
     menu: [],
     dialogFormVisible: false,
@@ -97,6 +98,7 @@ export default {
       this.dialogFormVisible = false
     },
     init() {
+      let that = this
       this.apiGet('api/articleread/' + this.id).then((res) => {
         this.info.title = res.data.title
         this.info.content = res.data.content
@@ -106,7 +108,8 @@ export default {
         this.info.telnum = res.data.telnum
         this.info.gzurl = res.data.gzurl
         this.info.home_url = res.data.home_url
-        this.share_desc = res.data.share_desc
+        this.info.share_desc = res.data.share_desc
+        this.info.share_pic = res.data.share_pic
         let userInfo = Lockr.get('userInfo')
         if (userInfo) {
           if (Number(res.data.userid) === userInfo.id) {
@@ -141,19 +144,25 @@ export default {
         if (this.swiperHeight > 0) {
           this.swiperHeight = swiperHeight
         }
+        wx.ready(function() {
+          var shareData = {
+            title: that.info.title,
+            desc: that.info.share_desc,
+            link: window.location.href.split('#')[0],
+            imgUrl: that.info.share_pic
+          }
+          wx.onMenuShareAppMessage(shareData)
+          wx.onMenuShareTimeline(shareData)
+          wx.onMenuShareQQ(shareData)
+          wx.onMenuShareWeibo(shareData)
+        })
       })
     }
   },
   created() {
-    // this.id = this.$route.params.id
-    // this.init()
     this.url = encodeURIComponent(location.href.split('#')[0])
+    // console.log(this.url)
     this.apiGet('/api/jsdk?url=' + this.url).then((res) => {
-    // axios.get('http://daikou.coolwx.com.cn/jssdk.php?url=' + this.url).then((response) => {
-    //   console.log(response)
-    // })
-    // this.apiGet('http://daikou.coolwx.com.cn/jssdk.php?url=' + this.url).then((res) => {
-      // console.log(res.data)
       wx.config({
         debug: false,
         appId: res.data.appId,
@@ -168,18 +177,6 @@ export default {
         ]
       })
       // console.log(wx.config)
-      wx.ready(function() {
-        var shareData = {
-          title: '平安好贷-安金服',
-          desc: '平安好贷-安金服',
-          link: this.url,
-          imgUrl: ''
-        }
-        wx.onMenuShareAppMessage(shareData)
-        wx.onMenuShareTimeline(shareData)
-        wx.onMenuShareQQ(shareData)
-        wx.onMenuShareWeibo(shareData)
-      })
     })
   },
   components: {
