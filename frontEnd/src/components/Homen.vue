@@ -2,7 +2,7 @@
 	<el-row class="panel m-w-1280">
 		<el-col :span="24" class="panel-center">
 			<aside :class="['w-200', 'ovf-hd',{'shouMenu': Collapse}] " v-show="!showLeftMenu">
-				<el-scrollbar wrap-class="list" wrap-style="color: red;" view-style="font-weight: bold;" view-class="view-box" :native="false">
+				<el-scrollbar wrap-class="list" wrap-style="" view-style="font-weight: bold;" view-class="view-box" :native="false">
 					<leftMenu v-on:isCollapse="isCollapse" :menuData="menuData" :menu="menu" ref="leftMenu"></leftMenu>
 				</el-scrollbar>
 			</aside>

@@ -159,4 +159,23 @@ class Article extends Common
     }
     return $data;
   }
+
+  public function addNum($id='')
+  {
+    $checkData = $this->get($id);
+    if (!$checkData) {
+        $this->error = '暂无此数据';
+        return false;
+    }
+    $this->startTrans();
+    try {
+      $this->where('id',$id)->setInc('share_num');
+      $this->commit();
+      return true;
+    } catch (\Exception $e) {
+      $this->rollback();
+      $this->error = '分享失败';
+      return false;
+    }
+  }
 }

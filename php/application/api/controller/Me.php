@@ -36,4 +36,13 @@ class Me extends ApiCommon
     }
     return resultArray(['data' => '删除成功']);
   }
+
+  public function getanums()
+  {
+    $param = $this->param;
+    $meModel = model('Me');
+    // dump($param);exit;
+    $data = $meModel->getAnum($param['id']);
+    return resultArray(['data' => $data]);
+  }
 }

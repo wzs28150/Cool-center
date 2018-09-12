@@ -68,7 +68,11 @@ export default {
     _g.closeGlobalLoading()
     let info = Lockr.get('userInfo')
     this.name = info.username
-    this.anums = info.anums
+    this.apiPost('api/me/getanums', { id: info.id }).then((res) => {
+      this.handelResponse(res, (data) => {
+        this.anums = data.anums
+      })
+    })
     let date2 = _g.convertDateFromString(info.beizhu1)
     let date1 = new Date()
     let date3 = date2.getTime() - date1.getTime()

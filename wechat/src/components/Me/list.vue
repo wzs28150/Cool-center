@@ -4,7 +4,9 @@
     <div class="item" v-for="(item, index)  in list"  :key="item.key">
       <!-- <img :src="item.image" alt=""> -->
       <div class="item-inner" @click="itemClick($event, index)">
-        <div class="img" :style="{ 'background-image': 'url(' + item.share_pic+ ')' }"></div>
+        <el-badge :value="item.share_num" class="badge">
+          <div class="img" :style="{ 'background-image': 'url(' + item.share_pic+ ')' }"></div>
+        </el-badge>
         <!-- <div class="author">
           {{item.author}}
         </div> -->
@@ -173,9 +175,10 @@ export default {
   .articleList{
     .item{ background-color: #fff; overflow: hidden; margin-bottom: 1px; position: relative;
       .item-inner{ margin: 15px; position: relative; min-height: 70px;  }
-      .img{ width: 70px; height: 70px; background-position: center; background-color: #eee; background-size: cover; position: absolute; left: 0; top: 0; }
+      .img{ width: 70px; height: 70px; background-position: center; background-color: #eee; background-size: cover; }
       // .author{ width: 70px; height: 1em; position: absolute; left: 0; bottom:0;}
       .icon{  position: absolute; right: 0; top:0; height: 70px; line-height: 70px; color: #409eff; animation: swing 1s .15s ease-in-out infinite; }
+
       .inner{ padding-left: 80px; margin-right: 1em;
         .title{
           color: #000; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 16px; line-height: 1.2em; margin-bottom: 10px;
@@ -186,11 +189,12 @@ export default {
         }
 
       }
-      .btn{ position: absolute; top:0; width: 100%; height: 100px; line-height: 100px;  z-index: 1; background-color: rgba(0,0,0,0.5); text-align: center; visibility: hidden; opacity: 0; transition: all .4s;
+      .btn{ position: absolute; top:0; width: 100%; height: 40px; padding: 30px 0;   z-index: 1; background-color: rgba(0,0,0,0.5); text-align: center; visibility: hidden; opacity: 0; transition: all .4s;
         &.active{
           visibility: visible; opacity: 1; transition: all .4s;
         }
       }
+      .badge{ width: 70px; height: 70px; position: absolute; left: 0; top: 0; }
       // &:hover{
       //   .btn{
       //     visibility: visible; opacity: 1; transition: all .4s;

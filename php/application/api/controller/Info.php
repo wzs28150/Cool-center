@@ -35,4 +35,14 @@ class Info extends Common
     cache('Info_' . $url, $data);
     return resultArray(['data' => $data]);
   }
+  public function addsharenum()
+  {
+    $param = $this->param;
+    $articleModel = model('Article');
+    $data = $articleModel->addNum($param['id']);
+    if (!$data) {
+        return resultArray(['error' => $articleModel->getError()]);
+    }
+    return resultArray(['data' => '分享成功']);
+  }
 }

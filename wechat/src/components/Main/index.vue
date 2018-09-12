@@ -94,29 +94,11 @@ export default {
       width: '',
       itemAmount: 8,
       refresh: 1,
-      topshow: false,
-      toplineheight: 30
+      anums: 0
     }
   },
   computed: {},
   methods: {
-    // async
-    getArticleList() {
-      const data = {
-        params: {
-          page: this.currentPage,
-          id: this.id
-        }
-      }
-      this.apiGet('api/article/', data).then((res) => {
-        this.handelResponse(res, (data) => {
-          this.list = res.data
-          setTimeout(() => {
-            _g.closeGlobalLoading()
-          }, 1500)
-        })
-      })
-    },
     navClick(item) {
       _g.openGlobalLoading()
       router.push({ path: this.$route.path, query: { id: item.id }})
@@ -130,22 +112,27 @@ export default {
       })
     },
     edit($href) {
-      let $url = '/article/edit'
-      router.push({ path: $url, query: { url: $href }})
+      if (this.anums > 0) {
+        let $url = '/article/edit'
+        router.push({ path: $url, query: { url: $href }})
+      } else {
+        bus.$message({
+          message: '当前文章数为0,请联系客服咨询购买~',
+          type: 'warning'
+        })
+      }
     },
     info($href) {
       let $url = '/articlen/info'
       router.push({ path: $url, query: { url: $href }})
     },
     getanums() {
-      let data = this.$route.query
-      if (data) {
-        if (data.page) {
-          this.currentPage = parseInt(data.page)
-        } else {
-          this.currentPage = 1
-        }
-      }
+      let userinfo = Lockr.get('userInfo')
+      this.apiPost('api/me/getanums', { id: userinfo.id }).then((res) => {
+        this.handelResponse(res, (data) => {
+          this.anums = data.anums
+        })
+      })
     },
     getId() {
       let data = this.$route.query
@@ -187,6 +174,7 @@ export default {
         this.mescroll.endErr()
       })
     },
+    // 获取数据
     getListDataFromNet (pageNum, pageSize, successCallback, errorCallback) {
       // 延时一秒,模拟联网
       const data = {
@@ -207,8 +195,7 @@ export default {
     },
     init() {
       this.getId()
-      // this.getCurrentPage()
-      // this.getArticleList()
+      this.getanums()
     }
   },
   created() {
@@ -221,6 +208,7 @@ export default {
   watch: {
     '$route' (to, from) {
       this.init()
+      // 切换分类 自动刷新 回到顶部
       this.mescroll.triggerDownScroll()
       this.mescroll.scrollTo(0, 0)
     }

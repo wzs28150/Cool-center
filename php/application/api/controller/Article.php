@@ -20,6 +20,10 @@ class Article extends ApiCommon
         $param = $this->param;
         $id = $param['id'];
         $page = $param['page'];
+        $time = strtotime(date('Y-m-d H:0:0'));
+        // echo time();
+        // echo strtotime(date('Y-m-d H:0:0'));
+        // dump(cache('Article_' . $time. $id. $page));
         if(cache('Article_' . $time. $id. $page)){
           return resultArray(['data' => cache('Article_' . $time. $id. $page)]);
         }
@@ -31,8 +35,8 @@ class Article extends ApiCommon
           $data[$key]['btnShow'] = false;
         }
         // 时间 id page
-        $time = strtotime(date('Y-m-d H',time()));
         cache('Article_' . $time. $id. $page, $data);
+        opcache_reset();
         return resultArray(['data' => $data]);
     }
 
@@ -72,7 +76,7 @@ class Article extends ApiCommon
     {
       $param = $this->param;
       if(cache('Art_' . $param['id'])){
-        return resultArray(['data' => cache('Article_' . $param['id'])]);
+        return resultArray(['data' => cache('Art_' . $param['id'])]);
       }
       $articleModel = model('Article');
       $data = $articleModel->getmeArticleById($param['id']);

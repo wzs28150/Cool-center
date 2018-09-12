@@ -10,10 +10,8 @@
 			<el-form-item label="真实姓名" prop="realname">
 				<el-input v-model.trim="form.realname" class="h-40 w-200"></el-input>
 			</el-form-item>
-			<el-form-item label="所属组织架构" prop="structure_id">
-				<el-select v-model="form.structure_id" placeholder="请选择组织架构" class="w-200">
-					<el-option v-for="item in orgsOptions" :label="item.title" :value="item.id"></el-option>
-				</el-select>
+      <el-form-item label="开户数" prop="kaihu_num">
+				<el-input-number v-model.trim="form.kaihu_num" controls-position="right" class="h-40 w-200" :min="0" ></el-input-number>
 			</el-form-item>
 			<el-form-item label="备注">
 				<el-input v-model.trim="form.remark" class="h-40 w-200"></el-input>
@@ -49,6 +47,7 @@
           realname: '',
           structure_id: null,
           remark: '',
+          kaihu_num: 0,
           groups: []
         },
         password: '',
@@ -62,9 +61,6 @@
           ],
           realname: [
             { required: true, message: '请输入真实姓名' }
-          ],
-          structure_id: [
-            { required: true, message: '请选择用户所属组织架构' }
           ]
         }
       }

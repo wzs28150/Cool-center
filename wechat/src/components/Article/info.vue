@@ -110,6 +110,7 @@ export default {
         this.info.home_url = res.data.home_url
         this.info.share_desc = res.data.share_desc
         this.info.share_pic = res.data.share_pic
+        document.title = res.data.gongzhonghao
         let userInfo = Lockr.get('userInfo')
         if (userInfo) {
           if (Number(res.data.userid) === userInfo.id) {
@@ -149,7 +150,17 @@ export default {
             title: that.info.title,
             desc: that.info.share_desc,
             link: window.location.href.split('#')[0],
-            imgUrl: that.info.share_pic
+            imgUrl: that.info.share_pic,
+            success: function () {
+              that.apiPost('api/info/addsharenum', { id: that.id }).then((res) => {
+                that.handelResponse(res, (data) => {
+                  that.$message({
+                    message: '分享成功~',
+                    type: 'success'
+                  })
+                })
+              })
+            }
           }
           wx.onMenuShareAppMessage(shareData)
           wx.onMenuShareTimeline(shareData)
@@ -191,8 +202,8 @@ export default {
   .fade-leave-active {
     transition: opacity .5s
   }
-  .articleinfo{ background-color: #fff; min-height: 100%;  padding: 20px 16px 12px; width: calc(100% - 32px);
-    .title{ font-size: 22px; line-height: 1.4; margin-bottom: 14px; color: #333; }
+  .articleinfo{ background-color: #fff; min-height: 100%;  padding: 20px 16px 12px; width: calc(100% - 32px); font-family: -apple-system-font,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei UI","Microsoft YaHei",Arial,sans-serif;
+    .title{ font-size: 22px; line-height: 1.4; margin-bottom: 14px; color: #333; font-weight: 400!important; }
     .rich_media_meta_list{ margin-bottom: 22px; line-height: 20px;
       em { font-style: normal; font-style: normal; }
       a{ color: #576b95; }

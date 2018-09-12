@@ -32,6 +32,8 @@ return [
 	'api/base/getConfigs' => ['api/base/getConfigs', ['method' => 'POST']],
 	// 【基础】获取验证码
 	'api/base/getVerify' => ['api/base/getVerify', ['method' => 'GET']],
+  // 【基础】上传图片
+	'api/upload' => ['api/upload/index', ['method' => 'POST']],
   // 【文章】获取广告列表
 	'api/article/adlist/:id' => ['api/article/adlist', ['method' => 'GET']],
   // 【文章】采集
@@ -42,8 +44,10 @@ return [
   'api/articleinfo/:id' => ['api/article/info', ['method' => 'GET']],
   'api/articleread/:id' => ['api/info/read', ['method' => 'GET']],
   'api/articlereadn' => ['api/info/readn', ['method' => 'POST']],
+  'api/info/addsharenum' => ['api/info/addsharenum', ['method' => 'POST']],
   'api/me/:id' => ['api/me/index', ['method' => 'GET']],
   'api/me/delete' => ['api/me/delete', ['method' => 'POST']],
+  'api/me/getanums' => ['api/me/getanums', ['method' => 'POST']],
   'api/base/imgproxy' => ['api/base/imgproxy', ['method' => 'GET']],
   'api/jsdk' => ['api/jsdk/index', ['method' => 'GET']],
 	// MISS路由

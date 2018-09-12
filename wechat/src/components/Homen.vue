@@ -1,6 +1,6 @@
 <template>
 	<div class="main">
-    <el-scrollbar wrap-class="list"  view-style="font-weight: bold;" view-class="view-box" :native="false">
+    <el-scrollbar wrap-class="list"   view-class="view-box" :native="false">
 		<transition name="fade" mode="out-in" appear>
 				<router-view v-loading="showLoading" ></router-view>
 		</transition>

@@ -20,6 +20,37 @@ import 'assets/css/base.css'
 import 'assets/css/font-awesome.min.css'
 import VueHtml5Editor from 'vue-html5-editor'
 
+// axios.defaults.baseURL = HOST
+// axios.defaults.baseURL = 'http://192.168.3.19:8900/'
+// axios.defaults.baseURL = 'http://192.168.1.106:9002'
+// http://wdj.coolwx.com.cn/
+axios.defaults.baseURL = 'http://wdj.coolwx.com.cn'
+axios.defaults.timeout = 1000 * 15
+axios.defaults.headers.authKey = Lockr.get('authKey')
+axios.defaults.headers.sessionId = Lockr.get('sessionId')
+axios.defaults.headers['Content-Type'] = 'application/json'
+
+const router = new VueRouter({
+  mode: 'history',
+  // mode: 'hash',
+  base: __dirname,
+  routes
+})
+
+router.beforeEach((to, from, next) => {
+  const hideLeft = to.meta.hideLeft
+  store.dispatch('showLeftMenu', hideLeft)
+  store.dispatch('showLoading', true)
+  NProgress.start()
+  next()
+})
+
+router.afterEach(transition => {
+  NProgress.done()
+})
+
+Vue.use(ElementUI)
+Vue.use(VueRouter)
 Vue.use(VueHtml5Editor, {
     // 全局组件名称，使用new VueHtml5Editor(options)时该选项无效
     // global component name
@@ -53,10 +84,10 @@ Vue.use(VueHtml5Editor, {
         // 上传参数,默认把图片转为base64而不上传
         // upload config,default null and convert image to base64
     upload: {
-      url: null,
+      url: axios.defaults.baseURL + '/api/upload',
       headers: {},
       params: {},
-      fieldName: {}
+      fieldName: 'file'
     },
         // 压缩参数,默认使用localResizeIMG进行压缩,设置为null禁止压缩
         // compression config,default resize image by localResizeIMG (https://github.com/think2011/localResizeIMG)
@@ -69,12 +100,16 @@ Vue.use(VueHtml5Editor, {
         // 响应数据处理,最终返回图片链接
         // handle response data，return image url
     uploadHandler(responseText) {
-            // default accept json data like  {ok:false,msg:"unexpected"} or {ok:true,data:"image url"}
+      // default accept json data like  {ok:false,msg:"unexpected"} or {ok:true,data:"image url"}
       var json = JSON.parse(responseText)
-      if (!json.ok) {
-        alert(json.msg)
+      console.log(json)
+      if (json.code === 200) {
+        return axios.defaults.baseURL + '/' + json.data
       } else {
-        return json.data
+        bus.$message({
+          message: '请求超时，请检查网络',
+          type: 'warning'
+        })
       }
     }
   },
@@ -148,45 +183,8 @@ Vue.use(VueHtml5Editor, {
     'undo',
     'full-screen',
     'info'
-  ],
-    // 扩展模块，具体可以参考examples或查看源码
-    // extended modules
-  modules: {
-        // omit,reference to source code of build-in modules
-  }
+  ]
 })
-// axios.defaults.baseURL = HOST
-axios.defaults.baseURL = 'http://192.168.3.19:8900/'
-// axios.defaults.baseURL = 'http://192.168.1.106:9002'
-// http://wdj.coolwx.com.cn/
-// axios.defaults.baseURL = 'http://wdj.coolwx.com.cn'
-axios.defaults.timeout = 1000 * 15
-axios.defaults.headers.authKey = Lockr.get('authKey')
-axios.defaults.headers.sessionId = Lockr.get('sessionId')
-axios.defaults.headers['Content-Type'] = 'application/json'
-
-const router = new VueRouter({
-  mode: 'history',
-  // mode: 'hash',
-  base: __dirname,
-  routes
-})
-
-router.beforeEach((to, from, next) => {
-  const hideLeft = to.meta.hideLeft
-  store.dispatch('showLeftMenu', hideLeft)
-  store.dispatch('showLoading', true)
-  NProgress.start()
-  next()
-})
-
-router.afterEach(transition => {
-  NProgress.done()
-})
-
-Vue.use(ElementUI)
-Vue.use(VueRouter)
-
 window.router = router
 window.store = store
 window.HOST = HOST

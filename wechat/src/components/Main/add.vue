@@ -5,7 +5,7 @@
     </div>
     <el-form ref="form" :model="form" :rules="rules" label-position="top"  label-width="6em">
       <el-form-item label="文章标题" prop="title">
-        <el-input v-model.trim="form.title" type="textarea" ></el-input>
+        <el-input v-model.trim="form.title" class="ftitle" type="textarea" ></el-input>
       </el-form-item>
       <el-form-item label="文章内容" >
         <vue-html5-editor :content="form.content" @change="updateContent" :auto-height="true" :show-module-name="false"></vue-html5-editor>
@@ -89,6 +89,10 @@ export default {
   mixins: [http, fomrMixin]
 }
 </script>
+<style media="screen">
+  .ftitle textarea{ font-size: 22px; line-height: 1.4; margin-bottom: 14px; color: #333; font-weight: 400!important; font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif!important; }
+  .vue-html5-editor img{ width: auto!important; height: auto!important; max-width: 100%!important;}
+</style>
 <style lang="scss" scoped>
 .edit{ background-color: #fff; padding: 15px; min-height: 100%; height: 100%;
   .title{ text-align: center;  margin-bottom: 15px; color: #000; font-size: 18px; }

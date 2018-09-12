@@ -24,4 +24,15 @@ class Me extends Common
     }
     return $data;
   }
+  public function getAnum($userid='')
+  {
+    $Map['userid'] = $userid;
+    $data = Db::name('member')->field('anums')->find($userid);
+    // dump($data);
+    if (!$data) {
+        $this->error = '暂无此数据';
+        return false;
+    }
+    return $data;
+  }
 }
