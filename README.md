@@ -3,8 +3,10 @@ Cool-center
 
 ## 项目介绍
 起初，Cool-center是一套个人搭建的基于Vue全家桶（Vue2.x + Vue-router2.x + Vuex）+ electron + Thinkphp5的前后端分离的微信广告植入系统。
+
 后来，觉得可扩展为一个平台并进行修改整合开发
 
+所以，Cool-center是一个多产品管理平台，且广泛适用于B/S架构的项目开发。Cool-center是对前后端分离技术的应用实践，2018年由酷创网络技术团队研发并投入商业开发使用。框架开源，希望能有更多志同道合的伙伴参与Cool-center的迭代 ^_^
 
 
 ## 使用许可：
