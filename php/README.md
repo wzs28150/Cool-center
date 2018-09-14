@@ -12,7 +12,7 @@ Cool-center
 ## 使用许可：
 Cool-center是基于MIT协议的开源框架，它完全免费。你可以免费下载Cool-center，用来搭建自己的或者团体的软件。
 
-## 主要适用技术栈
+## 主要使用技术栈
 * api框架：ThinkPHP 5.0.x
 * 客户端MVVM框架：Vue.JS 2.x
   管理端：Vue.JS 2.x + electron ^2.0.9 打包 桌面应用程序
