@@ -46,7 +46,7 @@
 		<changePwd ref="changePwd"></changePwd>
 	</el-row>
 </template>
-<style>
+<style scoped>
 	.fade-enter-active,
 	.fade-leave-active {
 		transition: opacity .5s

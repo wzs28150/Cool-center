@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="" v-on:mouseenter="changeCollapse(false)" v-on:mouseleave="changeCollapse(true)">
     <template>
       <div class="l-logo" v-if="!isCollapse">
         COOLVUE
@@ -10,18 +10,22 @@
     </template>
     <el-menu :default-active="menu" :unique-opened="unique" class="el-menu-vertical-demo" background-color="#324057" text-color="#fff" active-text-color="#ffd04b" @open="handleOpen" @close="handleClose" :collapse="isCollapse" >
       <el-menu-item index="main" @click="routerChange({'id':0,'title':'系统首页','url':'/home/main','icon':'cogs','menu_type':1,'sort':1,'status':1,'rule_id':61,'module':'Main','menu':'main','selected':true,'level':1})">
-         <template slot="title"><i class="fa fa-tachometer"  ></i> <span slot="title">系统首页</span>  </template>
+         <i class="fa fa-tachometer"  ></i>
+         <span slot="title">系统首页</span>
       </el-menu-item>
       <template v-for="(secMenu, index) in  menuData" >
-        <el-submenu :index="'m' + index" >
+        <el-submenu :index="'m' + index" v-if="secMenu.child" >
           <template slot="title"><i :class="['fa','fa-' + secMenu.icon]"  @click="routerChange(item)"></i> <span slot="title">{{secMenu.title}}</span>  </template>
-          <template v-if="secMenu.child">
-            <template v-for="(item, ind) in secMenu.child" >
-              <el-menu-item  :index="item.menu"  @click="routerChange(item)">{{item.title}}</el-menu-item>
-            </template>
+          <template v-for="(item, ind) in secMenu.child" >
+            <el-menu-item  :index="item.menu"  @click="routerChange(item)">{{item.title}}</el-menu-item>
           </template>
         </el-submenu>
+        <el-menu-item :index="secMenu.menu" v-else @click="routerChange(secMenu)">
+           <i :class="['fa','fa-' + secMenu.icon]"  ></i>
+           <span slot="title">{{secMenu.title}}</span>
+        </el-menu-item>
       </template>
+
       <template >
         <div class="Collapse" @click="changeCollapse">
           <div class="ico">
@@ -67,7 +71,7 @@ export default {
   props: ['menuData', 'menu'],
   data() {
     return {
-      isCollapse: false,
+      isCollapse: true,
       unique: true
     }
   },
@@ -83,8 +87,8 @@ export default {
         _g.shallowRefresh(this.$route.name)
       }
     },
-    changeCollapse() {
-      this.isCollapse = !this.isCollapse
+    changeCollapse($flag) {
+      this.isCollapse = $flag
       this.$emit('isCollapse', this.isCollapse)
     },
     handleOpen(key, keyPath) {

@@ -6,7 +6,13 @@
           <leftMenu v-on:isCollapse="isCollapse" :menuData="menuData" :menu="menu" ref="leftMenu"></leftMenu>
         </el-scrollbar>
       </aside>
+
       <section class="panel-c-c" :class="{'hide-leftMenu': hasChildMenu, 'shouMenu': Collapse}">
+        <el-row :gutter="20" style="height:100%;  position: relative; padding: 60px 0 20px; margin: 0;">
+        <div v-show="showCenterMenu"  :class="['w-200', 'ovf-hd',{'shouMenu': centerMenu}]"  style="height:100%; float: left;" >
+          <centerMenu  :menuData="centerMenuData" v-on:iscenterMenu="iscenterMenu" :menu="menu" ref="centerMenu"></centerMenu>
+        </div>
+
         <el-col :span="24" class="panel-top">
           <el-col :span="16" class="ofv-hd">
             <div class="fl p-l-20 p-r-20 top-menu2"   @click="refresh(menu)">
@@ -25,8 +31,7 @@
             </el-dropdown>
           </el-col>
         </el-col>
-
-        <div class="grid-content bg-purple-light">
+        <div  :class="['grid-content bg-purple-light', {'shouMenu': centerMenu}]">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
               <span>{{menu_title}}</span>
@@ -35,12 +40,14 @@
             <el-scrollbar wrap-class="list" wrap-style="color: red;" view-style="font-weight: bold;" view-class="view-box" :native="false">
             <el-col :span="24">
               <transition name="fade" mode="out-in" appear>
-                <router-view v-loading="showLoading" ></router-view>
+                <router-view v-loading="showLoading" v-on:centerMenu="centerMenu" ></router-view>
               </transition>
             </el-col>
             </el-scrollbar>
           </el-card>
         </div>
+
+        </el-row >
       </section>
     </el-col>
     <changePwd ref="changePwd"></changePwd>
@@ -99,7 +106,6 @@
     bottom: 0px;
     left: 200px;
     overflow-y: hidden;
-    padding: 60px 0 20px;
     transition: left .3s;overflow: hidden;
   }
   .user-menu{ right: 20px!important; cursor: pointer; }
@@ -137,7 +143,7 @@
   .hide-leftMenu {
     left: 0px;
   }
-  .grid-content{ height: calc(100% - 20px); padding: 20px 20px 0;}
+  .grid-content{ height: calc(100% - 20px); padding: 20px 20px 0; margin-bottom: 20px; }
   .el-scrollbar {
     height: 100%; width: 100%;
   }
@@ -150,6 +156,7 @@
 </style>
 <script>
   import leftMenu from './Common/leftMenu.vue'
+  import centerMenu from './Common/centerMenu.vue'
   import changePwd from './Account/changePwd.vue'
   import http from '../assets/js/http'
 
@@ -160,14 +167,16 @@
         topMenu: [],
         childMenu: [],
         menuData: [],
+        centerMenuData: [],
         hasChildMenu: false,
         menu: null,
         module: null,
         img: '',
         title: '',
         logo_type: null,
-        Collapse: false,
-        menu_title: null
+        Collapse: true,
+        menu_title: null,
+        centerMenu: false
       }
     },
     methods: {
@@ -244,6 +253,17 @@
       },
       isCollapse(Collapse) {
         this.Collapse = Collapse
+      },
+      iscenterMenu(flag) {
+        console.log(flag)
+        this.centerMenu = flag
+      },
+      getcenterMenu() {
+        this.apiGet('admin/base/getMenu/' + this.$route.meta.module).then((res) => {
+          this.handelResponse(res, (data) => {
+            this.centerMenuData = data.menusList
+          })
+        })
       }
     },
     created() {
@@ -275,6 +295,7 @@
           res.selected = false
         }
       })
+      this.getcenterMenu()
     },
     computed: {
       routerShow() {
@@ -283,10 +304,14 @@
       showLeftMenu() {
         this.hasChildMenu = store.state.showLeftMenu
         return store.state.showLeftMenu
+      },
+      showCenterMenu() {
+        return store.state.showCenterMenu
       }
     },
     components: {
       leftMenu,
+      centerMenu,
       changePwd
     },
     watch: {
@@ -294,6 +319,7 @@
         this.menuData = this.topMenu
         this.menu = to.meta.menu
         this.menu_title = to.meta.title
+        this.getcenterMenu()
       }
     },
     mixins: [http]

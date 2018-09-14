@@ -93,7 +93,9 @@
         this.$refs.form.validate((pass) => {
           if (pass) {
             this.isLoading = !this.isLoading
-            this.form.beizhu1 = this.form.beizhu1.getTime() / 1000
+            if (isNaN(this.form.beizhu1)) {
+              this.form.beizhu1 = this.form.beizhu1.getTime() / 1000
+            }
             this.apiPost('admin/member', this.form).then((res) => {
               this.handelResponse(res, (data) => {
                 _g.toastMsg('success', '添加成功')

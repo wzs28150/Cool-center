@@ -71,6 +71,11 @@ class Member extends Common
   //
   public function addMember($param)
   {
+    $kaihuNum = db('admin_user')->field('kaihu_num')->find($param['shuyu']);
+    if($kaihuNum["kaihu_num"] === 0){
+      $this->error = '开户数量为0,请联系客服咨询购买~';
+      return false;
+    }
     $checkData = $this->where('userid',$param['userid'])->find();
     if ($checkData) {
         $this->error = '用户名不能重复';

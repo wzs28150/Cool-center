@@ -2,6 +2,9 @@ const mutations = {
   showLeftMenu(state, status) {
     state.showLeftMenu = status
   },
+  showCenterMenu(state, status) {
+    state.showCenterMenu = status
+  },
   showLoading(state, status) {
     state.globalLoading = status
   },

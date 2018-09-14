@@ -293,6 +293,7 @@ class User extends Common
     {
         if ($u_id === 1) {
             $map['status'] = 1;
+            $map['issystem'] = 1;
             $menusList = Db::name('admin_menu')->where($map)->order('sort asc')->select();
         } else {
 					// dump($this);exit;
@@ -314,6 +315,7 @@ class User extends Common
             }
             empty($ruleIds) && ($ruleIds = '');
             $menuMap['status'] = 1;
+            $menuMap['issystem'] = 1;
             $menuMap['rule_id'] = array('in', $ruleIds);
 
             $menusList = Db::name('admin_menu')->where($menuMap)->order('sort asc')->fetchsql(false)->select();

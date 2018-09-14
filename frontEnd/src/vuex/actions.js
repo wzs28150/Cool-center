@@ -2,6 +2,9 @@ const actions = {
   showLeftMenu ({ commit }, status) {
     commit('showLeftMenu', status)
   },
+  showCenterMenu ({ commit }, status) {
+    commit('showCenterMenu', status)
+  },
   showLoading ({ commit }, status) {
     commit('showLoading', status)
   },

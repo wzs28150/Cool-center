@@ -99,4 +99,13 @@ class Base extends Common
       $data = $userModel->refresh($param['uid']);
       return resultArray(['data' => $data]);
     }
+
+    public function getcenterMenu()
+    {
+      $centerModel = model('Center');
+      $param = $this->param;
+      $data = $centerModel->getmenu($param['module']);
+      return resultArray(['data' => $data]);
+    }
+
 }

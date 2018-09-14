@@ -551,3 +551,7 @@ a {
 .el-select-dropdown__list {
   padding: 5px 0 20px;
 }
+
+.el-scrollbar__wrap {
+  overflow-x: hidden;
+}

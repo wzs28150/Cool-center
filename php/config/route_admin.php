@@ -19,7 +19,8 @@ return [
         'admin/wechat'          =>'admin/wechat',
         'admin/member'          =>'admin/member',
         'admin/ad'          =>'admin/ad',
-        'admin/article'          =>'admin/article'
+        'admin/article'          =>'admin/article',
+        'admin/center'          =>'admin/center'
     ],
 
 	// 【基础】登录
@@ -34,6 +35,8 @@ return [
 	'admin/base/getConfigs' => ['admin/base/getConfigs', ['method' => 'POST']],
 	// 【基础】获取验证码
 	'admin/base/getVerify' => ['admin/base/getVerify', ['method' => 'GET']],
+  // 【基础】获取验证码
+  'admin/base/getMenu/:module' => ['admin/base/getcenterMenu', ['method' => 'GET']],
 	// 【基础】上传图片
 	'admin/upload' => ['admin/upload/index', ['method' => 'POST']],
 	// 保存系统配置

@@ -38,7 +38,9 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const hideLeft = to.meta.hideLeft
+  const hideCenter = to.meta.hideCenter
   store.dispatch('showLeftMenu', hideLeft)
+  store.dispatch('showCenterMenu', hideCenter)
   store.dispatch('showLoading', true)
   NProgress.start()
   next()

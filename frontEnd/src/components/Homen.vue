@@ -40,7 +40,7 @@
 		<changePwd ref="changePwd"></changePwd>
 	</el-row>
 </template>
-<style>
+<style scoped>
 	.fade-enter-active,
 	.fade-leave-active {
 		transition: opacity .5s
@@ -160,7 +160,7 @@
         img: '',
         title: '',
         logo_type: null,
-        Collapse: false,
+        Collapse: true,
         menu_title: null
       }
     },

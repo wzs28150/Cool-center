@@ -148,6 +148,7 @@
             this.form.realname = data.realname
             this.form.structure_id = data.structure_id
             this.form.remark = data.remark
+            this.form.kaihu_num = data.kaihu_num
             _(data.groups).forEach((res1) => {
               _(this.groupOptions).forEach((res2) => {
                 if (res1.title == res2.else) {

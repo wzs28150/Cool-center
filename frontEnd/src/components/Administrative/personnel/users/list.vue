@@ -29,6 +29,10 @@
       prop="groups"
       label="所属用户组">
       </el-table-column>
+      <el-table-column
+      prop="kaihu_num"
+      label="开户数">
+      </el-table-column>
 			<el-table-column
 			label="备注"
 			prop="remark"
