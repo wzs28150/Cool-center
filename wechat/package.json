@@ -1,7 +1,7 @@
 {
-  "name": "vueThink",
+  "name": "coolCenter",
   "version": "1.0.0",
-  "description": "vueThink made by vue2.0",
+  "description": "coolCenter made by vue2.0",
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js"

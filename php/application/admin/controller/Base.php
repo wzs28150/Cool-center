@@ -88,7 +88,7 @@ class Base extends Common
         if (Request::instance()->isOptions()) {
             return ;
         } else {
-            echo 'vuethink接口';
+            echo 'coolCenter接口';
         }
     }
 
