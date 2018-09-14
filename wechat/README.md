@@ -1,7 +1,17 @@
-# 产品微广告 广告植入 客户端
+# 产品微广告 广告植入
 
-
-### 前端部署
+## 主要使用技术栈
+* Vue.JS 2.x <https://cn.vuejs.org/>
+* element-ui <http://element.eleme.io>
+* Swiper 3.x <http://swiper.com.cn>
+* axios  <https://github.com/mzabriskie/axios>
+* fontawesome <http://fontawesome.io/icons/>
+* js-cookie  <https://github.com/js-cookie/js-cookie>
+* lockr  <https://github.com/tsironis/lockr>
+* lodash  <http://lodashjs.com/docs/>
+* moment  <http://momentjs.cn/>
+* mescroll <http://www.mescroll.com/>
+### 客户端部署
 
 1.安装node.js
   前端部分是基于node.js上运行的，所以必须先安装node.js，版本要求为6.9.0以上(推荐安装官方推荐版本)，下载地址：https://nodejs.org/zh-cn/
@@ -37,4 +47,11 @@ error_page 500 502 503 504 /50x.html;
 
 注意：前端服务启动，默认会占用8080端口，所以在启动前端服务之前，请确认8080端口没有被占用。
 
-* 程序运行之前需搭建好Server端
+* 程序运行之前需搭建好Server api端
+
+### api端
+
+## 主要使用技术栈
+
+* querylist <https://www.querylist.cc/> 抓取新闻
+* Redis <https://redis.io/> 缓存
