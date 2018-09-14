@@ -95,13 +95,6 @@ Cool-center是基于MIT协议的开源框架，它完全免费。你可以免费
 
 当访问 <http://localhost>, 出现“coolCenter接口”即代表后端接口搭建成功。
 
-## 服务端重写配置
-```
-请参考[ThinPHP重写](https://www.kancloud.cn/manual/thinkphp5_1/353955)
-```
-
-
-
 ### 前端搭建
 ```
 请参考frontEnd里的README文件
