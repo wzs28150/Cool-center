@@ -1,0 +1,125 @@
+.l-logo {
+  overflow   : hidden;
+  color      : #fff;
+  font-size  : 30px;
+  line-height: 30px;
+  font-weight: bold;
+  text-align : center;
+  padding    : 20px 0;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", 微软雅黑, Tahoma, Arial, sans-serif;
+  position   : fixed;
+  left       : 0;
+  top        : 0;
+  z-index    : 999;
+  width      : 200px;
+  background : rgb(50, 64, 87);
+  transition : width 0.3s;
+}
+
+.nopadding {
+  padding: 0;
+}
+
+.l-logo {
+  img {
+    width  : 50px;
+    padding: 5px 7px;
+  }
+
+  + .el-menu {
+    padding-top: 70px;
+  }
+}
+
+.shouMenu .l-logo {
+  width     : 64px;
+  transition: width 0.3s;
+}
+
+.el-menu {
+  border: none;
+}
+
+.Collapse {
+  color      : #fff;
+  text-align : center;
+  position   : relative;
+  line-height: 0;
+  font-size  : 0;
+  cursor     : pointer;
+  padding    : 20px 0;
+
+  i {
+    font-size       : 16px;
+    background-color: #324057;
+    position        : relative;
+    z-index         : 1;
+    border-radius   : 100%;
+    box-shadow      : 0 0 10px #909399;
+    transform       : rotate(0deg);
+    transition      : transform 0.3s;
+    padding         : 5px;
+  }
+
+  .ico {}
+
+  &::before {
+    position        : absolute;
+    width           : 200%;
+    height          : 1px;
+    background-color: #909399;
+    content         : "";
+    left            : 50%;
+    margin-left     : -100%;
+    top             : 50%;
+    transform       : scale(0.5);
+  }
+}
+
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width     : 200px;
+  min-height: 400px;
+}
+
+.shouMenu .Collapse i {
+  transform : rotate(180deg);
+  transition: transform 0.3s;
+}
+
+.el-submenu__title {}
+
+.is-opened .el-menu > li {
+  background-color: #1F2D3D !important;
+}
+
+.el-menu--popup-right-start {
+  margin-left : 0;
+  margin-right: 0;
+}
+
+.el-menu-item [class^=fa],
+.el-submenu [class^=fa] {
+  margin-right  : 5px;
+  width         : 24px;
+  text-align    : center;
+  font-size     : 18px;
+  vertical-align: middle;
+}
+
+.el-menu--collapse {
+  .el-menu-item span,
+  .el-submenu .el-submenu__title span {
+    height    : 0;
+    width     : 0;
+    overflow  : hidden;
+    visibility: hidden;
+    display   : inline-block;
+    transition: all 0.3s;
+  }
+
+  .el-menu-item .el-submenu__icon-arrow,
+  .el-submenu .el-submenu__title .el-submenu__icon-arrow {
+    display   : none;
+    transition: all 0.3s;
+  }
+}
